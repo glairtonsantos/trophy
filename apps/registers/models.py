@@ -36,6 +36,9 @@ class Monster(models.Model):
     class Meta:
         db_table = 'monsters'
 
+    def __str__(self):
+        return self.name
+
 class KilledMonster(models.Model):
     id = models.BigAutoField(
         primary_key=True,
