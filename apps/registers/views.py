@@ -1,8 +1,8 @@
 from django.contrib.auth.models import User, Group
 from rest_framework import viewsets, permissions, generics, filters, pagination
 from apps.registers.serializers import UserSerializer
-from .serializers import MonsterSerializer
-from .models import Monster
+from .serializers import MonsterSerializer, CollectCoinCreateSerializer
+from .models import Monster, CollectedCoin
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -20,3 +20,11 @@ class MonsterListView(generics.ListAPIView):
     filter_backends = [filters.SearchFilter]
     pagination_class = pagination.PageNumberPagination
     search_fields = ['name',]
+
+class CollectCoinCreateView(generics.CreateAPIView):
+    """
+    Register the collected coin
+    """
+    queryset = CollectedCoin.objects.all()
+    serializer_class = CollectCoinCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]

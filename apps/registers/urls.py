@@ -7,5 +7,6 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
-    path('monsters/', views.MonsterListView.as_view(), name='monster-list')
+    path('monsters/', views.MonsterListView.as_view(), name='monster-list'),
+    path('coins/collect/', views.CollectCoinCreateView.as_view(), name='collected-coin-create'),
 ]
