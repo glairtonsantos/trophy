@@ -13,9 +13,10 @@ from .serializers import (
     MonsterSerializer, 
     CollectCoinCreateSerializer, 
     KillMonsterCreateSerializer, 
-    KilledMonsterDetailSerializer
+    KilledMonsterDetailSerializer,
+    DeathCreateSerializer
 )
-from .models import Monster, CollectedCoin, KilledMonster
+from .models import Monster, CollectedCoin, KilledMonster, Death
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -59,3 +60,11 @@ class KilledMonsterCreateView(generics.CreateAPIView):
         instance = self.perform_create(serializer)
         instance_serializer = KilledMonsterDetailSerializer(instance, context={'request': request})
         return response.Response(instance_serializer.data, status=status.HTTP_201_CREATED)
+
+class DeathCreateView(generics.CreateAPIView):
+    """
+    Register death
+    """
+    queryset = Death.objects.all()
+    serializer_class = DeathCreateSerializer
+    permission_classes = [permissions.IsAuthenticated]

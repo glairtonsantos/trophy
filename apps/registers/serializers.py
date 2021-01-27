@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Monster, CollectedCoin, KilledMonster
+from .models import Monster, CollectedCoin, KilledMonster, Death
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
@@ -56,3 +56,19 @@ class KillMonsterCreateSerializer(serializers.ModelSerializer):
         killed_monster = KilledMonster.objects.create(user=user, monster=monster)
 
         return killed_monster
+
+class DeathCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Death
+        fields = ('id', 'timestamp', 'user')
+
+    def _get_user(self):
+        user = getattr(self.context.get('request'), 'user', None)
+
+        return user if user and user.is_authenticated else None
+
+    def create(self, validated_data):
+        user = self._get_user()
+        death = Death.objects.create(user=user)
+
+        return death
