@@ -12,6 +12,7 @@ class CollectedCoin(models.Model):
         null=False,
         blank=False,
         help_text='coin value',
+        default=10
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
