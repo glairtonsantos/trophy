@@ -31,6 +31,7 @@ class MonsterListView(generics.ListAPIView):
     """
     queryset = Monster.objects.all()
     serializer_class = MonsterSerializer
+    permission_classes = [permissions.IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     pagination_class = pagination.PageNumberPagination
     search_fields = ['name',]

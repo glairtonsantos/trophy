@@ -4,7 +4,7 @@ from django.dispatch import receiver
 from apps.registers.models import CollectedCoin, KilledMonster, Death
 from .models import Trophy, TrophyUser
 
-def register_trophy_user(user, instance_queryset, attribute):
+def register_trophy_user(user, instance_queryset, attribute, value_register=None):
     amount = instance_queryset.count()
 
     finder_trophy = Trophy.objects.filter(
@@ -15,7 +15,8 @@ def register_trophy_user(user, instance_queryset, attribute):
     if finder_trophy:
         TrophyUser.objects.create(
             trophy=finder_trophy,
-            user=user
+            user=user,
+            value_register_field=value_register
         )
 
 @receiver(post_save, sender=CollectedCoin)
@@ -34,7 +35,8 @@ def verify_if_win_trophy_killed_monster(sender, instance, **kwargs):
     register_trophy_user(
         instance.user, 
         queryset, 
-        'monsters'
+        'monsters',
+        instance.monster.name
     )
 
 @receiver(post_save, sender=Death)

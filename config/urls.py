@@ -19,6 +19,7 @@ from apps.registers import views
 
 urlpatterns = [
     path('', include('apps.registers.urls')),
+    path('', include('apps.awards.urls')),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
 ]

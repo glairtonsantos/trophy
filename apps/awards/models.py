@@ -83,6 +83,12 @@ class TrophyUser(models.Model):
         help_text='identify Trophy User',
     )
     trophy = models.ForeignKey(Trophy, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='trophies', on_delete=models.CASCADE)
+    value_register_field = models.CharField(
+        null=True,
+        blank=True,
+        max_length=50, 
+        help_text='value if count by a field'
+    )
     class Meta:
         db_table = 'trophy_user'
