@@ -50,7 +50,11 @@ class KilledMonster(models.Model):
         blank=False,
         help_text='identify killed monster',
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, 
+        related_name='dead_monsters',
+        on_delete=models.CASCADE
+    )
     monster = models.ForeignKey(Monster, on_delete=models.CASCADE)
 
     class Meta:
@@ -63,7 +67,11 @@ class Death(models.Model):
         blank=False,
         help_text='identify death',
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, 
+        related_name='deaths',
+        on_delete=models.CASCADE
+    )
     timestamp = models.DateTimeField(
         null=True,
         auto_now_add=True,
