@@ -1,2 +1,9 @@
 Django==3.1.2
 djangorestframework==3.11.2
+django-filter==2.3.0
+django-crispy-forms==1.8.1
+django-dotenv==1.4.2
+django-extensions==2.2.8
+django-cors-headers==3.2.1
+smart-getenv==1.1.0
+drf-yasg==1.17.0

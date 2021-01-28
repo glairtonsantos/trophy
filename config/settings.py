@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+from smart_getenv import getenv
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,12 +21,16 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=m%^q6!01o58@!)pwx7pwlv3i9z5y-_m5d!46maoo-7g_k5m&6'
+SECRET_KEY = os.getenv(
+    'SECRET_KEY', '=m%^q6!01o58@!)pwx7pwlv3i9z5y-_m5d!46maoo-7g_k5m&6'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = getenv('DEBUG', type=bool, default=True)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = getenv(
+    'ALLOWED_HOSTS', type=list, default=['localhost', '127.0.0.1'],
+)
 
 
 # Application definition
@@ -38,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'drf_yasg',
     'apps.registers',
     'apps.awards',
 ]
@@ -126,3 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# Application definitions
+APP_VERSION = '0.1.0'
+APP_NAME = 'Trophy - Ribon'
+APP_DESCRIPTION = 'Code Challenge - Ribon'
