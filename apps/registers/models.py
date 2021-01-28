@@ -14,7 +14,11 @@ class CollectedCoin(models.Model):
         help_text='coin value',
         default=10
     )
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User, 
+        related_name='coins',
+        on_delete=models.CASCADE
+    )
 
     class Meta:
         db_table = 'collected_coin'
