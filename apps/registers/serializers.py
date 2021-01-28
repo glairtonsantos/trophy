@@ -4,12 +4,12 @@ from .models import Monster, CollectedCoin, KilledMonster, Death
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
-        fields = ['url', 'username', 'email', 'name']
+        fields = ('url', 'username', 'email', 'name')
 
 class MonsterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Monster
-        fields = ['id', 'name']
+        fields = ('id', 'name')
 
 class CollectCoinCreateSerializer(serializers.ModelSerializer):
     class Meta:
