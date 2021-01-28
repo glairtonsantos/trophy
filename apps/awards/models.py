@@ -1,7 +1,5 @@
 from django.db import models
-
-from .utils import get_choice_all_models
-
+from apps.registers.models import User
 class Category(models.Model):
     id = models.BigAutoField(
         primary_key=True,
@@ -18,8 +16,17 @@ class Category(models.Model):
 
     class Meta:
         db_table = 'categories'
+    
+    def __str__(self):
+        return self.description
 
 class Level(models.Model):
+    MODELS_CLASS = (
+        ('coins', 'CollectedCoin'),
+        ('monsters', 'KilledMonster'),
+        ('deaths', 'Death'),
+    )
+
     id = models.BigAutoField(
         primary_key=True,
         null=False,
@@ -27,21 +34,20 @@ class Level(models.Model):
         help_text='identify category',
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-
     amount = models.BigIntegerField(
         null=False,
         blank=False,
         help_text='amount anything',
         default=1
     )
-    model_class = models.CharField(
+    register_class = models.CharField(
         null=False,
         blank=False,
         max_length=50, 
-        choice=get_choice_all_models('registers'),
+        choices=MODELS_CLASS,
         help_text='anything class to count'
     )
-    field = models.CharField(
+    register_field = models.CharField(
         null=True,
         blank=True,
         max_length=50, 
@@ -50,3 +56,33 @@ class Level(models.Model):
     
     class Meta:
         db_table = 'levels'
+
+    def __str__(self):
+        return f'{self.id}: {self.category.description} - {self.amount}'
+
+class Trophy(models.Model):
+    id = models.BigAutoField(
+        primary_key=True,
+        null=False,
+        blank=False,
+        help_text='identify Trophy',
+    )
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'trophies'
+    
+    def __str__(self):
+        return f'{self.category} - {self.level.amount}'
+
+class TrophyUser(models.Model):
+    id = models.BigAutoField(
+        primary_key=True,
+        null=False,
+        blank=False,
+        help_text='identify Trophy User',
+    )
+    trophy = models.ForeignKey(Trophy, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    class Meta:
+        db_table = 'trophy_user'
