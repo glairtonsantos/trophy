@@ -1,22 +1,15 @@
-from django.contrib.auth.models import User, Group
-from rest_framework import (
-    viewsets, 
-    permissions, 
-    generics, 
-    filters, 
-    pagination,
-    response,
-    status
-)
+from django.contrib.auth.models import User
+from rest_framework import (filters, generics, pagination, permissions,
+                            response, status, viewsets)
+
 from apps.registers.serializers import UserSerializer
-from .serializers import (
-    MonsterSerializer, 
-    CollectCoinCreateSerializer, 
-    KillMonsterCreateSerializer, 
-    KilledMonsterDetailSerializer,
-    DeathCreateSerializer
-)
-from .models import Monster, CollectedCoin, KilledMonster, Death
+
+from .models import CollectedCoin, Death, KilledMonster, Monster
+from .serializers import (CollectCoinCreateSerializer, DeathCreateSerializer,
+                          KilledMonsterDetailSerializer,
+                          KillMonsterCreateSerializer, MonsterSerializer)
+
+
 class UserViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows users to be viewed or edited.
@@ -24,6 +17,7 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
     permission_classes = [permissions.IsAuthenticated]
+
 
 class MonsterListView(generics.ListAPIView):
     """
@@ -34,7 +28,8 @@ class MonsterListView(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
     filter_backends = [filters.SearchFilter]
     pagination_class = pagination.PageNumberPagination
-    search_fields = ['name',]
+    search_fields = ['name']
+
 
 class CollectCoinCreateView(generics.CreateAPIView):
     """
@@ -43,6 +38,7 @@ class CollectCoinCreateView(generics.CreateAPIView):
     queryset = CollectedCoin.objects.all()
     serializer_class = CollectCoinCreateSerializer
     permission_classes = [permissions.IsAuthenticated]
+
 
 class KilledMonsterCreateView(generics.CreateAPIView):
     """
@@ -59,8 +55,15 @@ class KilledMonsterCreateView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         instance = self.perform_create(serializer)
-        instance_serializer = KilledMonsterDetailSerializer(instance, context={'request': request})
-        return response.Response(instance_serializer.data, status=status.HTTP_201_CREATED)
+        instance_serializer = KilledMonsterDetailSerializer(
+            instance,
+            context={'request': request}
+        )
+        return response.Response(
+            instance_serializer.data,
+            status=status.HTTP_201_CREATED
+        )
+
 
 class DeathCreateView(generics.CreateAPIView):
     """

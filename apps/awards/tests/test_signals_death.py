@@ -1,9 +1,10 @@
-from model_mommy import mommy
 from django.test import TestCase
+from model_mommy import mommy
 
-from django.contrib.auth.models import User
 from apps.registers.models import Death
-from ..models import Category, Level,Trophy
+
+from ..models import Category, Level, Trophy
+
 
 class CollectedCoinSignalsTestCase(TestCase):
     def setUp(self):
@@ -22,13 +23,13 @@ class CollectedCoinSignalsTestCase(TestCase):
         )
 
         # user death
-        death = Death.objects.create(user=self.user)
+        Death.objects.create(user=self.user)
 
         trophies = self.user.trophies.filter(trophy=trophy_death).exists()
 
         # verify if user has trophy death
         self.assertTrue(trophies)
-    
+
     def test_register_if_user_win_trophy_death_others_levels(self):
         category = Category.objects.create(description='numbers deaths user')
 
@@ -39,14 +40,14 @@ class CollectedCoinSignalsTestCase(TestCase):
                 amount=amount,
                 register_class='deaths'
             )
-            trophy_death = Trophy.objects.create(
+            Trophy.objects.create(
                 category=category,
                 level=level
             )
 
         # user died 100 times
         for coin in range(100):
-            death = Death.objects.create(user=self.user)
+            Death.objects.create(user=self.user)
 
         trophies = self.user.trophies.filter(trophy__category=category)
 

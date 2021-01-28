@@ -1,23 +1,24 @@
+from django.contrib.auth.models import User
+from django.urls import include, path
 from rest_framework import status
 from rest_framework.reverse import reverse
 from rest_framework.test import APITestCase, URLPatternsTestCase
 
-from django.contrib.auth.models import User
-from django.urls import include, path
 from .models import Monster
+
 
 class KilledMonsterCreateViewTestCase(APITestCase, URLPatternsTestCase):
     urlpatterns = [
             path('', include('apps.registers.urls')),
         ]
-    
+
     def setUp(self):
         # user authenticate
         self.user = User.objects.create(username='fakeuser')
         self.client.force_login(user=self.user)
 
         self.monster = Monster.objects.create(name='king-kong')
-    
+
     def test_create_register_killed_monster(self):
         response = self.client.post(
             reverse('killed-monster-create'),
@@ -61,12 +62,12 @@ class DeathCreateViewTestCase(APITestCase, URLPatternsTestCase):
     urlpatterns = [
             path('', include('apps.registers.urls')),
         ]
-    
+
     def setUp(self):
         # user authenticate
         self.user = User.objects.create(username='fakeuser')
         self.client.force_login(user=self.user)
-    
+
     def test_create_register_death_user_required(self):
         response = self.client.post(
             reverse('death-create'),
@@ -88,12 +89,12 @@ class CollectCoinCreateViewTestCase(APITestCase, URLPatternsTestCase):
     urlpatterns = [
             path('', include('apps.registers.urls')),
         ]
-    
+
     def setUp(self):
         # user authenticate
         self.user = User.objects.create(username='fakeuser')
         self.client.force_login(user=self.user)
-    
+
     def test_create_register_collected_coin_user_required(self):
         response = self.client.post(
             reverse('collected-coin-create'),
@@ -109,7 +110,7 @@ class CollectCoinCreateViewTestCase(APITestCase, URLPatternsTestCase):
                 ]
             },
         )
-    
+
     def test_create_register_collected_coin_value_number(self):
         response = self.client.post(
             reverse('collected-coin-create'),

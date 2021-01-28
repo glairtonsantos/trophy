@@ -1,5 +1,8 @@
 from django.db import models
+
 from apps.registers.models import User
+
+
 class Category(models.Model):
     id = models.BigAutoField(
         primary_key=True,
@@ -16,9 +19,10 @@ class Category(models.Model):
 
     class Meta:
         db_table = 'categories'
-    
+
     def __str__(self):
         return self.description
+
 
 class Level(models.Model):
     MODELS_CLASS = (
@@ -43,22 +47,23 @@ class Level(models.Model):
     register_class = models.CharField(
         null=False,
         blank=False,
-        max_length=50, 
+        max_length=50,
         choices=MODELS_CLASS,
         help_text='anything class to count'
     )
     register_field = models.CharField(
         null=True,
         blank=True,
-        max_length=50, 
+        max_length=50,
         help_text='if want to count anything of a class'
     )
-    
+
     class Meta:
         db_table = 'levels'
 
     def __str__(self):
         return f'{self.id}: {self.category.description} - {self.amount}'
+
 
 class Trophy(models.Model):
     id = models.BigAutoField(
@@ -69,11 +74,13 @@ class Trophy(models.Model):
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
+
     class Meta:
         db_table = 'trophies'
-    
+
     def __str__(self):
         return f'{self.category} - {self.level.amount}'
+
 
 class TrophyUser(models.Model):
     id = models.BigAutoField(
@@ -83,12 +90,17 @@ class TrophyUser(models.Model):
         help_text='identify Trophy User',
     )
     trophy = models.ForeignKey(Trophy, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, related_name='trophies', on_delete=models.CASCADE)
+    user = models.ForeignKey(
+        User,
+        related_name='trophies',
+        on_delete=models.CASCADE
+    )
     value_register_field = models.CharField(
         null=True,
         blank=True,
-        max_length=50, 
+        max_length=50,
         help_text='value if count by a field'
     )
+
     class Meta:
         db_table = 'trophy_user'

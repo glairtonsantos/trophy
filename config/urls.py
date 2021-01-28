@@ -16,6 +16,7 @@ Including another URLconf
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
 
+from django.views.generic import RedirectView
 from django.conf import settings
 from django.contrib import admin
 from django.urls import include, path
@@ -32,6 +33,7 @@ schema_view = get_schema_view(
 redoc_ui = schema_view.with_ui('redoc', cache_timeout=0)
 
 urlpatterns = [
+    path('', RedirectView.as_view(pattern_name='docs', permanent=False)),
     path('', include('apps.registers.urls')),
     path('', include('apps.awards.urls')),
     path('admin/', admin.site.urls),

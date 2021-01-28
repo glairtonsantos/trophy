@@ -1,15 +1,20 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Monster, CollectedCoin, KilledMonster, Death
+
+from .models import CollectedCoin, Death, KilledMonster, Monster
+
+
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = User
         fields = ('url', 'username', 'email', 'name')
 
+
 class MonsterSerializer(serializers.ModelSerializer):
     class Meta:
         model = Monster
         fields = ('id', 'name')
+
 
 class CollectCoinCreateSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,12 +32,14 @@ class CollectCoinCreateSerializer(serializers.ModelSerializer):
 
         return collected_coin
 
+
 class KilledMonsterDetailSerializer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     monster = MonsterSerializer(read_only=True)
+
     class Meta:
         model = KilledMonster
-        fields = ('id', 'user', 'monster')     
+        fields = ('id', 'user', 'monster')
 
     def get_user(self, obj):
         user = obj.user
@@ -40,6 +47,8 @@ class KilledMonsterDetailSerializer(serializers.ModelSerializer):
             'id': user.id,
             'name': user.username
         }
+
+
 class KillMonsterCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = KilledMonster
@@ -53,9 +62,13 @@ class KillMonsterCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = self._get_user()
         monster = validated_data['monster']
-        killed_monster = KilledMonster.objects.create(user=user, monster=monster)
+        killed_monster = KilledMonster.objects.create(
+            user=user,
+            monster=monster
+        )
 
         return killed_monster
+
 
 class DeathCreateSerializer(serializers.ModelSerializer):
     class Meta:

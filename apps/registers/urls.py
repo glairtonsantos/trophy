@@ -7,9 +7,24 @@ router = routers.DefaultRouter()
 router.register(r'users', views.UserViewSet)
 
 urlpatterns = [
-    path('monsters/', views.MonsterListView.as_view(), name='monster-list'),
-    path('monsters/kill/', views.KilledMonsterCreateView.as_view(), name='killed-monster-create'),
-    path('coins/collect/', views.CollectCoinCreateView.as_view(), name='collected-coin-create'),
-    path('users/die/', views.DeathCreateView.as_view(), name='death-create'),
-    
+    path(
+        'monsters/',
+        views.MonsterListView.as_view(),
+        name='monster-list'
+    ),
+    path(
+        'monsters/kill/',
+        views.KilledMonsterCreateView.as_view(),
+        name='killed-monster-create'
+    ),
+    path(
+        'coins/collect/',
+        views.CollectCoinCreateView.as_view(),
+        name='collected-coin-create'
+    ),
+    path(
+        'users/die/',
+        views.DeathCreateView.as_view(),
+        name='death-create'
+    ),
 ]

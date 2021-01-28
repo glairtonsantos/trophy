@@ -1,16 +1,19 @@
-from model_mommy import mommy
 from django.test import TestCase
+from model_mommy import mommy
 
-from django.contrib.auth.models import User
 from apps.registers.models import CollectedCoin
-from ..models import Category, Level,Trophy
+
+from ..models import Category, Level, Trophy
+
 
 class CollectedCoinSignalsTestCase(TestCase):
     def setUp(self):
         self.user = mommy.make('User')
 
     def test_register_if_user_win_trophy_coin(self):
-        category = Category.objects.create(description='numbers collected coins')
+        category = Category.objects.create(
+            description='numbers collected coins'
+        )
         level = Level.objects.create(
             category=category,
             amount=1,
@@ -22,15 +25,17 @@ class CollectedCoinSignalsTestCase(TestCase):
         )
 
         # user collected coin
-        collected_coin = CollectedCoin.objects.create(user=self.user, value=10)
+        CollectedCoin.objects.create(user=self.user, value=10)
 
         trophies = self.user.trophies.filter(trophy=trophy_coin).exists()
 
         # verify if user has trophy coin
         self.assertTrue(trophies)
-    
+
     def test_register_if_user_win_trophy_coin_others_levels(self):
-        category = Category.objects.create(description='numbers collected coins')
+        category = Category.objects.create(
+            description='numbers collected coins'
+        )
 
         # create others levels
         for amount in [100, 1000, 10000, 100000]:
@@ -39,14 +44,14 @@ class CollectedCoinSignalsTestCase(TestCase):
                 amount=amount,
                 register_class='coins'
             )
-            trophy_coin = Trophy.objects.create(
+            Trophy.objects.create(
                 category=category,
                 level=level
             )
 
         # user collected 1000 coins
         for coin in range(1000):
-            collected_coin = CollectedCoin.objects.create(user=self.user, value=10)
+            CollectedCoin.objects.create(user=self.user, value=10)
 
         trophies = self.user.trophies.filter(trophy__category=category)
 
