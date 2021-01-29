@@ -16,7 +16,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all().order_by('-date_joined')
     serializer_class = UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class MonsterListView(generics.ListAPIView):
@@ -25,8 +25,8 @@ class MonsterListView(generics.ListAPIView):
     """
     queryset = Monster.objects.all()
     serializer_class = MonsterSerializer
-    permission_classes = [permissions.IsAuthenticated]
-    filter_backends = [filters.SearchFilter]
+    permission_classes = (permissions.IsAuthenticated,)
+    filter_backends = (filters.SearchFilter,)
     pagination_class = pagination.PageNumberPagination
     search_fields = ['name']
 
@@ -37,7 +37,7 @@ class CollectCoinCreateView(generics.CreateAPIView):
     """
     queryset = CollectedCoin.objects.all()
     serializer_class = CollectCoinCreateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
 
 
 class KilledMonsterCreateView(generics.CreateAPIView):
@@ -46,7 +46,7 @@ class KilledMonsterCreateView(generics.CreateAPIView):
     """
     queryset = KilledMonster.objects.all()
     serializer_class = KillMonsterCreateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
 
     def perform_create(self, serializer):
         return serializer.save(user=self.request.user)
@@ -71,4 +71,4 @@ class DeathCreateView(generics.CreateAPIView):
     """
     queryset = Death.objects.all()
     serializer_class = DeathCreateSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = (permissions.IsAuthenticated,)
