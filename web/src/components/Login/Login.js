@@ -1,19 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import API from '../../api';
 
 import './Login.css';
 
 async function loginUser(credentials) {
-  return fetch('http://localhost:8000/api-token-auth/', {
-    method: 'POST',
-    headers: {
+  let request = JSON.stringify(credentials)
+  return API.post(`api-token-auth/`,
+    request,
+    {headers: {
       'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(credentials)
-  })
-    .then(data => data.json())
- }
-
+    }}).then(
+      res => {
+        if(res.status == 200){
+          let token = res.data.token
+          return token
+        }
+      }
+    )
+}
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
   const [password, setPassword] = useState();

@@ -1,8 +1,5 @@
 import React from 'react';
-
-import axios from 'axios';
-
-
+import API from '../../api';
 export default class MonsterList extends React.Component {
   state = {
     monsters: []
@@ -10,14 +7,11 @@ export default class MonsterList extends React.Component {
 
   componentDidMount() {
     
-    axios({
-      method: 'get',
-      url:`http://localhost:8000/monsters/`
+    API.get(`monsters/`).then(res => {
+      const monsters = res.data.results;
+      this.setState({ monsters });
     })
-      .then(res => {
-        const monsters = res.data.results;
-        this.setState({ monsters });
-      })
+      
   }
 
   render() {

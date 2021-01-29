@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Panel from '../Panel/Panel';
 import Login from '../Login/Login';
 import useToken from './useToken';
+import MonsterList from '../Monster/MonsterList';
 
 function App() {
   const { token, setToken } = useToken();
@@ -17,7 +18,7 @@ function App() {
       <h1>Trophy - Ribon</h1>
       <BrowserRouter>
         <Switch>
-          <Route path="/home">
+          <Route path="/painel">
             <Panel />
           </Route>
           <Route path="/login">
