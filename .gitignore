@@ -130,6 +130,7 @@ www/
 
 # dependencies
 /node_modules/*
+.bin/
 /.pnp
 .pnp.js
 
