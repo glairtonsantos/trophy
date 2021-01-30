@@ -18,7 +18,10 @@ async function loginUser(credentials) {
           return token
         }
       }
-    )
+    ).catch(e => {
+      console.log(e.response.data)
+      alert('Ops! verify your username or password')
+    })
 }
 export default function Login({ setToken }) {
   const [username, setUserName] = useState();
