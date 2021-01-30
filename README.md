@@ -96,7 +96,14 @@ python manage.py createsuperuser --username admin --email admin@email.com
 ```
 após executar esse comando será necessário adicionar um senha
 
-6. Executar API:
+6. Popular tabelas
+
+Foi criado um comando para criar 3 categorias e os níveis de cada, de acordo com o descrito no [desafio](https://public.3.basecamp.com/p/evofybzgHo1ffgqq6CZXGDMk)
+```bash
+python manage.py create_categories_and_levels
+```
+
+7. Executar API:
 
 Agora para executar basta
 ```bash
