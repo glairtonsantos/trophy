@@ -14,6 +14,7 @@ export default class Death extends React.Component {
           console.log(res);
           console.log(res.data);
           document.getElementById('form-id-death').reset();
+          alert('User Die!');
         }
       }).catch(e => {
         console.log(e.response.data)

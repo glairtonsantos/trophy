@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../../api';
+import Table from 'react-bootstrap/Table';
 
 export default class TrophyList extends React.Component {
   state = {
@@ -18,9 +19,28 @@ export default class TrophyList extends React.Component {
   render() {
     return (
       <div>
-        <ul>
-          { this.state.trophies.map(item => <li>{item.trophy.category.description}: {item.trophy.level.amount} {item.value_register_field}</li>)}
-        </ul>
+        
+        <Table striped bordered hover variant="dark">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Trophies</th>
+              <th>Amount</th>
+              <th>Detail</th>
+            </tr>
+          </thead>
+          <tbody>
+            { this.state.trophies.map(item => 
+              <tr>
+                <td>{item.trophy.id}</td>  
+                <td>{item.trophy.category.description}</td>
+                <td>{item.trophy.level.amount}</td>
+                <td>{item.value_register_field}</td>
+              </tr>)
+            }
+          </tbody>
+        </Table>
+
       </div>
     )
   }

@@ -18,6 +18,7 @@ export default class MonsterItem extends React.Component {
         if(res.status === 201){
           console.log(res);
           console.log(res.data);
+          alert('Killed Monster!');
         }
       }).catch(e => {
         console.log(e.response.data)
