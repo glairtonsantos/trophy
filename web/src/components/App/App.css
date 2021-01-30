@@ -47,6 +47,10 @@
   width: 50%;
 }
 
+.btn-right {
+  text-align: right;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

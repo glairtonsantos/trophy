@@ -25,6 +25,7 @@ export default class CollectCoin extends React.Component {
           console.log(res.data);
           document.getElementById('form-id-coin').reset();
           alert('Collected Coin!');
+          window.location.reload();
         }
       }).catch(e => {
         console.log(e.response.data)

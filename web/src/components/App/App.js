@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 
 import './App.css';
 import useToken from './useToken';
@@ -12,8 +12,15 @@ import CollectCoin from '../Coin/CollectCoin';
 import Death from '../Death/Death';
 import TrophyList from '../Trophy/TrophyList';
 
+
 function App() {
+
   const { token, setToken } = useToken();
+
+  function logout() {
+    localStorage.removeItem('token');
+    window.location.reload();
+  }
 
   if(!token) {
     return <Login setToken={setToken} />
@@ -21,8 +28,16 @@ function App() {
 
   return(
     <Container>
-
-      <h1>Trophy - Ribon</h1>
+      <Row>
+        <Col>
+          <h1>Trophy - Ribon</h1>
+        </Col>
+        <Col className="btn-right">
+          <Button variant="outline-info" size="sm" onClick={logout}>Exit</Button>
+        </Col>
+        
+      </Row>
+      
       <hr></hr>
       <h3>User - Panel</h3>
       <Panel></Panel>

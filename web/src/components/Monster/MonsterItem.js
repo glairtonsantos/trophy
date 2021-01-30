@@ -4,7 +4,6 @@ import { Form, Button } from 'react-bootstrap';
 import API from '../../api';
 
 export default class MonsterItem extends React.Component {
-
   
   handleSubmit = event => {
     event.preventDefault();
@@ -19,6 +18,7 @@ export default class MonsterItem extends React.Component {
           console.log(res);
           console.log(res.data);
           alert('Killed Monster!');
+          window.location.reload();
         }
       }).catch(e => {
         console.log(e.response.data)
