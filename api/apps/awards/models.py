@@ -74,6 +74,11 @@ class Trophy(models.Model):
     )
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     level = models.ForeignKey(Level, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(
+        null=True,
+        auto_now_add=True,
+        help_text='register datetime win trophy',
+    )
 
     class Meta:
         db_table = 'trophies'
