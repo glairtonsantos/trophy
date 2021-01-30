@@ -1,6 +1,7 @@
 import React from 'react';
-import API from '../../api';
+import { Form, Button } from 'react-bootstrap';
 
+import API from '../../api';
 export default class CollectCoin extends React.Component {
   state = {
     value_coin: 10
@@ -32,14 +33,17 @@ export default class CollectCoin extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} id='form-id-coin'>
-          <label>
-            value coin:
-            <input type='number' name='value_coin' onChange={this.handleChange} />
-          </label>
-          <button type='submit'>Collect Coin!</button>
-        </form>
+      <div className="col-4">
+        <Form inline  onSubmit={this.handleSubmit} id='form-id-coin'>
+            <Form.Control 
+              type='number' 
+              name='value_coin' 
+              placeholder='value coin'
+              onChange={this.handleChange}>
+
+            </Form.Control>
+          <Button  variant="outline-warning" type='submit'>Collect Coin!</Button>
+        </Form>
       </div>
     )
   }

@@ -1,4 +1,6 @@
 import React from 'react';
+import { Form, Button } from 'react-bootstrap';
+
 import API from '../../api';
 
 export default class MonsterItem extends React.Component {
@@ -26,12 +28,12 @@ export default class MonsterItem extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
             <input  type='hidden' name='monster' 
                     value={this.props.monster_item.id} 
                     ref={(input) => { this.monsterInput = input }} />
-          <button type='submit'>{this.props.monster_item.name}</button>
-        </form>
+          <Button variant="outline-danger" type='submit'>kill {this.props.monster_item.name}!</Button>
+        </Form>
       </div>
     )
   }

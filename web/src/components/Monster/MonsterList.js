@@ -1,6 +1,9 @@
 import React from 'react';
+import ListGroup from 'react-bootstrap/ListGroup';
+
 import API from '../../api';
 import MonsterItem from './MonsterItem';
+
 export default class MonsterList extends React.Component {
   state = {
     monsters: []
@@ -17,12 +20,15 @@ export default class MonsterList extends React.Component {
 
   render() {
     return (
-      // <ul>
-      //   { this.state.monsters.map(monster => <li><button>{monster.name}</button></li>)}
-      // </ul>
-      <ul>
-        { this.state.monsters.map(monster => <li><MonsterItem monster_item={monster}></MonsterItem></li> )}
-      </ul>
+      <div className="col-4">
+        <ListGroup>
+          { this.state.monsters.map(monster => 
+            <ListGroup.Item>
+              <MonsterItem monster_item={monster}></MonsterItem>
+            </ListGroup.Item> 
+          )}
+        </ListGroup>
+      </div>
     )
   }
 }

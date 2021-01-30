@@ -28,6 +28,21 @@
   color: #61dafb;
 }
 
+.row {
+  --bs-gutter-x: 1.5rem;
+  --bs-gutter-y: 0;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 25px;
+  margin-top: calc(var(--bs-gutter-y) * -1);
+  margin-right: calc(var(--bs-gutter-x)/ -2);
+  margin-left: calc(var(--bs-gutter-x)/ -2);
+}
+
+.col-4 {
+  width: 33.33%;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

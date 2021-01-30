@@ -17,9 +17,11 @@ export default class TrophyList extends React.Component {
 
   render() {
     return (
-      <ul>
-        { this.state.trophies.map(item => <li>{item.trophy.category.description}: {item.trophy.level.amount}</li>)}
-      </ul>
+      <div>
+        <ul>
+          { this.state.trophies.map(item => <li>{item.trophy.category.description}: {item.trophy.level.amount} {item.value_register_field}</li>)}
+        </ul>
+      </div>
     )
   }
 }

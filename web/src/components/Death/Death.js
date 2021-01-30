@@ -1,4 +1,6 @@
 import React from 'react';
+import { Form, Button } from 'react-bootstrap';
+
 import API from '../../api';
 
 export default class Death extends React.Component {
@@ -21,10 +23,10 @@ export default class Death extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.handleSubmit} id='form-id-death'>
-          <button type='submit'>User Die!</button>
-        </form>
+      <div className="col-4">
+        <Form onSubmit={this.handleSubmit} id='form-id-death'>
+          <Button variant="outline-dark" type='submit'>User Die!</Button>
+        </Form>
       </div>
     )
   }

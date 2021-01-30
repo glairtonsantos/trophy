@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+
 import Panel from '../Panel/Panel';
 import Login from '../Login/Login';
 import useToken from './useToken';
@@ -19,6 +22,7 @@ function App() {
   return(
     <div className="wrapper">
       <h1>Trophy - Ribon</h1>
+
       <BrowserRouter>
         <Switch>
           <Route path="/painel">
@@ -29,12 +33,16 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+
       <hr></hr>
-      <MonsterList></MonsterList>
-      <hr></hr>
-      <CollectCoin></CollectCoin>
-      <hr></hr>
-      <Death></Death>
+      <div className="row">
+        <CollectCoin></CollectCoin>
+        
+        <MonsterList></MonsterList>
+        
+        <Death></Death>
+      </div>
+
       <hr></hr>
       <h3>User - Trophies</h3>
       <TrophyList></TrophyList>
