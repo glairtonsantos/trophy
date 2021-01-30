@@ -1,12 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './App.css';
+import useToken from './useToken';
 
 import Panel from '../Panel/Panel';
 import Login from '../Login/Login';
-import useToken from './useToken';
 import MonsterList from '../Monster/MonsterList';
 import CollectCoin from '../Coin/CollectCoin';
 import Death from '../Death/Death';
@@ -22,19 +21,12 @@ function App() {
   return(
     <div className="wrapper">
       <h1>Trophy - Ribon</h1>
-
-      <BrowserRouter>
-        <Switch>
-          <Route path="/painel">
-            <Panel />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-        </Switch>
-      </BrowserRouter>
+      <hr></hr>
+      <h3>User - Panel</h3>
+      <Panel></Panel>
 
       <hr></hr>
+      <h3>User - Actions</h3>
       <div className="row">
         <CollectCoin></CollectCoin>
         

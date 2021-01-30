@@ -23,7 +23,6 @@ export default class TrophyList extends React.Component {
         <Table striped bordered hover variant="dark">
           <thead>
             <tr>
-              <th>#</th>
               <th>Trophies</th>
               <th>Amount</th>
               <th>Detail</th>
@@ -32,7 +31,6 @@ export default class TrophyList extends React.Component {
           <tbody>
             { this.state.trophies.map(item => 
               <tr>
-                <td>{item.trophy.id}</td>  
                 <td>{item.trophy.category.description}</td>
                 <td>{item.trophy.level.amount}</td>
                 <td>{item.value_register_field}</td>
