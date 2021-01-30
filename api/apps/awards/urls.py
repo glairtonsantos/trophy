@@ -4,7 +4,7 @@ from . import views
 
 urlpatterns = [
     path(
-        'users/<int:id>/trophies',
+        'trophies/',
         views.TrophyUserListView.as_view(),
         name='trophy-user-list'
     ),
