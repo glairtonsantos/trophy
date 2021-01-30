@@ -30,6 +30,7 @@ export default function Login({ setToken }) {
       password
     });
     setToken(token);
+    window.location.reload();
   }
 
   return(

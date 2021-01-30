@@ -1,17 +1,12 @@
 import React from 'react';
-import axios from 'axios';
+import API from '../../api';
 
 export default class CollectCoin extends React.Component {
   state = {
-    user_id: '',
     value_coin: 10
   }
 
-  handleChangeUser = event => {
-    this.setState({ user_id: event.target.value });
-
-  }
-  handleChangeCoin = event => {
+  handleChange = event => {
     this.setState({ value_coin: event.target.value });
   }
 
@@ -19,27 +14,31 @@ export default class CollectCoin extends React.Component {
     event.preventDefault();
 
     const user_request = {
-      user: this.state.user_id,
       value: this.state.value_coin
     };
 
-    axios.post(`http://localhost:8000/coins/collect/`, user_request)
+    API.post(`coins/collect/`, user_request)
       .then(res => {
-        console.log(res);
-        console.log(res.data);
+        if(res.status === 201){
+          console.log(res);
+          console.log(res.data);
+          document.getElementById('form-id-coin').reset();
+        }
+      }).catch(e => {
+        console.log(e.response.data)
+        alert('error in collect coin!')
       })
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={this.handleSubmit} id='form-id-coin'>
           <label>
-            user id and value coin:
-            <input type="number" name="user_id" onChange={this.handleChangeUser} />
-            <input type="number" name="value_coin" onChange={this.handleChangeCoin} />
+            value coin:
+            <input type='number' name='value_coin' onChange={this.handleChange} />
           </label>
-          <button type="submit">Collect Coin!</button>
+          <button type='submit'>Collect Coin!</button>
         </form>
       </div>
     )

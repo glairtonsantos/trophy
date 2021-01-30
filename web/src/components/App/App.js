@@ -5,6 +5,8 @@ import Panel from '../Panel/Panel';
 import Login from '../Login/Login';
 import useToken from './useToken';
 import MonsterList from '../Monster/MonsterList';
+import CollectCoin from '../Coin/CollectCoin';
+import Death from '../Death/Death';
 
 function App() {
   const { token, setToken } = useToken();
@@ -26,6 +28,13 @@ function App() {
           </Route>
         </Switch>
       </BrowserRouter>
+      <hr></hr>
+      <MonsterList></MonsterList>
+      <hr></hr>
+      <CollectCoin></CollectCoin>
+      <hr></hr>
+      <Death></Death>
+
     </div>
   );
 }
