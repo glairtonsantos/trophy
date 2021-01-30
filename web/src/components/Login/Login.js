@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import API from '../../api';
+import { Button, Form, Row, Col } from 'react-bootstrap';
 
+import API from '../../api';
 import './Login.css';
 
 async function loginUser(credentials) {
@@ -36,19 +37,30 @@ export default function Login({ setToken }) {
   return(
     <div className="login-wrapper">
       <h1>Please Log In</h1>
-    <form onSubmit={handleSubmit}>
-      <label>
-        <p>Username</p>
-        <input type="text"  onChange={e => setUserName(e.target.value)}/>
-      </label>
-      <label>
-        <p>Password</p>
-        <input type="password" onChange={e => setPassword(e.target.value)} />
-      </label>
-      <div>
-        <button type="submit">Login</button>
-      </div>
-    </form>
+    <Form onSubmit={handleSubmit}>
+      <Form.Group as={Row} controlId="formHorizontalEmail">
+          <Form.Label>
+          Username
+          </Form.Label>
+          <Col>
+            <Form.Control type="text" placeholder="Username"  onChange={e => setUserName(e.target.value)} />
+          </Col>
+      </Form.Group>
+      
+      <Form.Group as={Row} controlId="formHorizontalPassword">
+          <Form.Label>
+            Password
+          </Form.Label>
+          <Col>
+            <Form.Control type="password" placeholder="Password"  onChange={e => setPassword(e.target.value)} />
+          </Col>
+      </Form.Group>
+      <Form.Group className="login-btn">
+        <Button variant="primary" type="submit">
+          Login
+        </Button>
+      </Form.Group>
+    </Form>
     </div>
   )
 }

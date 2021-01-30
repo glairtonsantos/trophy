@@ -3,3 +3,6 @@
     flex-direction: column;
     align-items: center;
 }
+.login-btn {
+    text-align: center;
+}

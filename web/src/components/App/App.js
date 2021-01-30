@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
 import './App.css';
 import useToken from './useToken';
@@ -19,7 +20,8 @@ function App() {
   }
 
   return(
-    <div className="wrapper">
+    <Container>
+
       <h1>Trophy - Ribon</h1>
       <hr></hr>
       <h3>User - Panel</h3>
@@ -39,7 +41,7 @@ function App() {
       <h3>User - Trophies</h3>
       <TrophyList></TrophyList>
 
-    </div>
+    </Container>
   );
 }
 
