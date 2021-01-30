@@ -27,4 +27,9 @@ urlpatterns = [
         views.DeathCreateView.as_view(),
         name='death-create'
     ),
+    path(
+        'user/detail/',
+        views.PanelDetailUserView.as_view(),
+        name='panel-detail-user'
+    ),
 ]

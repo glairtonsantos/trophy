@@ -28,7 +28,10 @@ class CollectCoinCreateSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         user = self._get_user()
-        collected_coin = CollectedCoin.objects.create(user=user)
+        collected_coin = CollectedCoin.objects.create(
+            user=user,
+            value=validated_data['value']
+        )
 
         return collected_coin
 
@@ -85,3 +88,18 @@ class DeathCreateSerializer(serializers.ModelSerializer):
         death = Death.objects.create(user=user)
 
         return death
+
+
+class PanelDetailUserSerializer(serializers.Serializer):
+    coins = serializers.SerializerMethodField()
+    killed_monsters = serializers.SerializerMethodField()
+    deaths = serializers.SerializerMethodField()
+
+    def get_coins(self, obj):
+        return obj.coins.count()
+    
+    def get_killed_monsters(self, obj):
+        return obj.dead_monsters.count()
+    
+    def get_deaths(self, obj):
+        return obj.deaths.count()

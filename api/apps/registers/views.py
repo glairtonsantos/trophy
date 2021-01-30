@@ -7,7 +7,8 @@ from apps.registers.serializers import UserSerializer
 from .models import CollectedCoin, Death, KilledMonster, Monster
 from .serializers import (CollectCoinCreateSerializer, DeathCreateSerializer,
                           KilledMonsterDetailSerializer,
-                          KillMonsterCreateSerializer, MonsterSerializer)
+                          KillMonsterCreateSerializer, MonsterSerializer,
+                          PanelDetailUserSerializer)
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -72,3 +73,23 @@ class DeathCreateView(generics.CreateAPIView):
     queryset = Death.objects.all()
     serializer_class = DeathCreateSerializer
     permission_classes = (permissions.IsAuthenticated,)
+
+
+class PanelDetailUserView(generics.GenericAPIView):
+    """
+    List all amount user actions
+    """
+    permission_classes = (permissions.IsAuthenticated,)
+    serializer_class = PanelDetailUserSerializer
+
+    def _get_user(self):
+        user = self.request.user
+
+        return user if user and user.is_authenticated else None
+
+    def get(self, request):
+        user = self._get_user()
+        serializer = self.get_serializer(user)
+        return response.Response(
+            serializer.data
+        )
