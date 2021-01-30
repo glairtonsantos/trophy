@@ -19,7 +19,7 @@ class MonsterSerializer(serializers.ModelSerializer):
 class CollectCoinCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = CollectedCoin
-        fields = ('id', 'value', 'user')
+        fields = ('id', 'value')
 
     def _get_user(self):
         user = getattr(self.context.get('request'), 'user', None)
@@ -52,7 +52,7 @@ class KilledMonsterDetailSerializer(serializers.ModelSerializer):
 class KillMonsterCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = KilledMonster
-        fields = ('id', 'user', 'monster')
+        fields = ('id', 'monster')
 
     def _get_user(self):
         user = getattr(self.context.get('request'), 'user', None)
@@ -73,7 +73,7 @@ class KillMonsterCreateSerializer(serializers.ModelSerializer):
 class DeathCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Death
-        fields = ('id', 'timestamp', 'user')
+        fields = ('id', 'timestamp')
 
     def _get_user(self):
         user = getattr(self.context.get('request'), 'user', None)
