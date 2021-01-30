@@ -7,6 +7,7 @@ import useToken from './useToken';
 import MonsterList from '../Monster/MonsterList';
 import CollectCoin from '../Coin/CollectCoin';
 import Death from '../Death/Death';
+import TrophyList from '../Trophy/TrophyList';
 
 function App() {
   const { token, setToken } = useToken();
@@ -34,6 +35,9 @@ function App() {
       <CollectCoin></CollectCoin>
       <hr></hr>
       <Death></Death>
+      <hr></hr>
+      <h3>User - Trophies</h3>
+      <TrophyList></TrophyList>
 
     </div>
   );
